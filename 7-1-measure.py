@@ -18,6 +18,7 @@ def desimal2binary(value):
 
 def adc():
     value = 0
+    v=[0]*8
     for i in range(7, -1, -1):
         value += 2**i
         dacc = []
@@ -27,6 +28,8 @@ def adc():
         compvalue = GPIO.input(comp)
         if compvalue == 1:
             value -= 2**i
+        else:
+            v[i]=1
     return value
 
 try:
@@ -38,3 +41,5 @@ try:
 
 finally:
     GPIO.cleanup()
+with open('data.txt', 'w') as d:
+    d.write("\n".join([str(i) for i in a]))
